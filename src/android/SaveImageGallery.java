@@ -182,7 +182,7 @@ public class SaveImageGallery extends CordovaPlugin {
             // now we create the image in the folder
             File imageFile = new File(folder, fileName);
             FileOutputStream out = new FileOutputStream(imageFile);
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out.write(bmp);
             out.flush();
             out.close();
 
