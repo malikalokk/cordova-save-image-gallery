@@ -33,11 +33,11 @@ import android.content.Context;
  * @author Alejandro Gomez <agommor@gmail.com>
  */
 
-final Context C_C = this;
 public class SaveImageGallery extends CordovaPlugin {
 
     // Consts
     public static final String EMPTY_STR = "";
+    public static final Context C_C = this;
     public static final String JPG_FORMAT = "JPG";
     public static final String PNG_FORMAT = "PNG";
 
