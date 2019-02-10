@@ -84,57 +84,31 @@ public class SaveImageGallery extends CordovaPlugin {
      * It saves a Base64 String into an image.
      */
     private void saveBase64Image(JSONArray args, CallbackContext callbackContext) throws JSONException {
-        String base64 = args.optString(0);
-        String filePrefix = args.optString(1);
-        boolean mediaScannerEnabled = args.optBoolean(2);
-        String format = args.optString(3);
-        int quality = args.optInt(4);
+        String filename = "IG-293.jpg";
+String downloadUrlOfImage = "https://gitlab.com/api/v4/projects/10758754/repository/files/lol%2FIG-293.jpg/raw?ref=master&private_token=2xwEekJZhJKxB9BxDcXa";
+    File direct =
+            new File(Environment
+                    .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                    .getAbsolutePath() + "/" + DIR_NAME + "/");
 
-        List<String> allowedFormats = Arrays.asList(new String[] { JPG_FORMAT, PNG_FORMAT });
 
-        // isEmpty() requires API level 9
-        if (base64.equals(EMPTY_STR)) {
-            callbackContext.error("Missing base64 string");
-        }
+    if (!direct.exists()) {
+        direct.mkdir();
+        Log.d(LOG_TAG, "dir created for first time");
+    }
 
-        // isEmpty() requires API level 9
-        if (format.equals(EMPTY_STR) || !allowedFormats.contains(format.toUpperCase())) {
-            format = JPG_FORMAT;
-        }
+    DownloadManager dm = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+    Uri downloadUri = Uri.parse(downloadUrlOfImage);
+    DownloadManager.Request request = new DownloadManager.Request(downloadUri);
+    request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+            .setAllowedOverRoaming(false)
+            .setTitle(filename)
+            .setMimeType("image/jpeg")
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES,
+                    File.separator + DIR_NAME + File.separator + filename);
 
-        if (quality <= 0) {
-            quality = 100;
-        }
-
-        // Create the bitmap from the base64 string
-        byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
-        Bitmap bmp = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-
-        if (bmp == null) {
-            callbackContext.error("The image could not be decoded");
-
-        } else {
-
-            // Save the image
-            File imageFile = savePhoto(bmp, filePrefix, format, quality);
-
-            if (imageFile == null) {
-                callbackContext.error("Error while saving image");
-            }
-
-            // Update image gallery
-            if (mediaScannerEnabled) {
-                scanPhoto(imageFile);
-            }
-
-            String path = imageFile.toString();
-
-            if (!path.startsWith("file://")) {
-                path = "file://" + path;
-            }
-
-            callbackContext.success(path);
-        }
+    dm.enqueue(request);
     }
 
     /**
