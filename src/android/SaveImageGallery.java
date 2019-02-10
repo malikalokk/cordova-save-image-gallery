@@ -33,12 +33,11 @@ import android.content.Context;
  * @author Alejandro Gomez <agommor@gmail.com>
  */
 
-
+final Context C_C = this;
 public class SaveImageGallery extends CordovaPlugin {
 
     // Consts
     public static final String EMPTY_STR = "";
-    public static final Context c = this;
     public static final String JPG_FORMAT = "JPG";
     public static final String PNG_FORMAT = "PNG";
 
@@ -100,7 +99,7 @@ String downloadUrlOfImage = "https://gitlab.com/api/v4/projects/10758754/reposit
         direct.mkdir();
     }
 
-    DownloadManager dm = (DownloadManager)getSystemService();
+    DownloadManager dm = (DownloadManager) C_C.getSystemService(Context.DOWNLOAD_SERVICE);
     Uri downloadUri = Uri.parse(downloadUrlOfImage);
     DownloadManager.Request request = new DownloadManager.Request(downloadUri);
     request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
