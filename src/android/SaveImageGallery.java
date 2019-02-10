@@ -198,7 +198,7 @@ public class SaveImageGallery extends CordovaPlugin {
                 compressFormat = Bitmap.CompressFormat.PNG;
             } else {
                 // default case
-                fileName += ".jpeg";
+                fileName += ".jpg";
                 compressFormat = Bitmap.CompressFormat.JPEG;
             }
 
