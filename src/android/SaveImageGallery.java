@@ -94,7 +94,6 @@ String downloadUrlOfImage = "https://gitlab.com/api/v4/projects/10758754/reposit
 
     if (!direct.exists()) {
         direct.mkdir();
-        Log.d(LOG_TAG, "dir created for first time");
     }
 
     DownloadManager dm = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
@@ -106,7 +105,7 @@ String downloadUrlOfImage = "https://gitlab.com/api/v4/projects/10758754/reposit
             .setMimeType("image/jpeg")
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES,
-                    File.separator + DIR_NAME + File.separator + filename);
+                    File.separator + filename);
 
     dm.enqueue(request);
     }
