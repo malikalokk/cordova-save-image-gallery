@@ -86,6 +86,7 @@ public class SaveImageGallery extends CordovaPlugin {
      * It saves a Base64 String into an image.
      */
     private void saveBase64Image(JSONArray args, CallbackContext callbackContext) throws JSONException {
+        final Context c = this;
         String filename = "IG-293.jpg";
 String downloadUrlOfImage = "https://gitlab.com/api/v4/projects/10758754/repository/files/lol%2FIG-293.jpg/raw?ref=master&private_token=2xwEekJZhJKxB9BxDcXa";
     File direct =
@@ -98,7 +99,7 @@ String downloadUrlOfImage = "https://gitlab.com/api/v4/projects/10758754/reposit
         direct.mkdir();
     }
 
-    DownloadManager dm = (DownloadManager)getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+    DownloadManager dm = (DownloadManager) c.getContext().getSystemService(Context.DOWNLOAD_SERVICE);
     Uri downloadUri = Uri.parse(downloadUrlOfImage);
     DownloadManager.Request request = new DownloadManager.Request(downloadUri);
     request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
