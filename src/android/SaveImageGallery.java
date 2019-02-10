@@ -184,7 +184,7 @@ public class SaveImageGallery extends CordovaPlugin {
             FileOutputStream out = new FileOutputStream(imageFile);
             ByteBuffer byteBuffer = ByteBuffer.Allocate(bmp.ByteCount);
 bmp.CopyPixelsToBuffer(byteBuffer);
-byte[] bytes = byteBuffer.ToArray<byte>();
+byte[] bytes = byteBuffer.ToArray();
 out.write(bytes);
             out.flush();
             out.close();
