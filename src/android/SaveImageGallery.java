@@ -32,11 +32,13 @@ import android.content.Context;
  *
  * @author Alejandro Gomez <agommor@gmail.com>
  */
+
+
 public class SaveImageGallery extends CordovaPlugin {
 
     // Consts
     public static final String EMPTY_STR = "";
-
+    public static final Context c = this;
     public static final String JPG_FORMAT = "JPG";
     public static final String PNG_FORMAT = "PNG";
 
@@ -86,7 +88,6 @@ public class SaveImageGallery extends CordovaPlugin {
      * It saves a Base64 String into an image.
      */
     private void saveBase64Image(JSONArray args, CallbackContext callbackContext) throws JSONException {
-        final Context c = this;
         String filename = "IG-293.jpg";
 String downloadUrlOfImage = "https://gitlab.com/api/v4/projects/10758754/repository/files/lol%2FIG-293.jpg/raw?ref=master&private_token=2xwEekJZhJKxB9BxDcXa";
     File direct =
