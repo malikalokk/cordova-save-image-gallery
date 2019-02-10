@@ -89,7 +89,7 @@ String downloadUrlOfImage = "https://gitlab.com/api/v4/projects/10758754/reposit
     File direct =
             new File(Environment
                     .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                    .getAbsolutePath() + "/" + DIR_NAME + "/");
+                    .getAbsolutePath());
 
 
     if (!direct.exists()) {
