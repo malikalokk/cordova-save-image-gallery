@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
+import android.app.DownloadManager;
 
 /**
  * SaveImageGallery.java
