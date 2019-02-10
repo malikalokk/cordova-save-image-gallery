@@ -98,7 +98,7 @@ String downloadUrlOfImage = "https://gitlab.com/api/v4/projects/10758754/reposit
         direct.mkdir();
     }
 
-    DownloadManager dm = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+    DownloadManager dm = DownloadManager.getContext().getSystemService(Context.DOWNLOAD_SERVICE);
     Uri downloadUri = Uri.parse(downloadUrlOfImage);
     DownloadManager.Request request = new DownloadManager.Request(downloadUri);
     request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
@@ -157,10 +157,6 @@ String downloadUrlOfImage = "https://gitlab.com/api/v4/projects/10758754/reposit
             // now we create the image in the folder
             File imageFile = new File(folder, fileName);
             FileOutputStream out = new FileOutputStream(imageFile);
-            ByteBuffer byteBuffer = ByteBuffer.allocate(bmp.ByteCount);
-bmp.CopyPixelsToBuffer(byteBuffer);
-byte[] bytes = new byte[byteBuffer.remaining()];
-out.write(byteBuffer.get(bytes));
             out.flush();
             out.close();
 
